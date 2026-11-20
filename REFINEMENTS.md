@@ -3,6 +3,9 @@
 Living checklist. We tackle one item at a time, top to bottom unless re-prioritized.
 Line numbers refer to `LiquidityRange.mq5` as of commit `1bf176d`.
 
+The EA's trading rules are specified separately in `docs/EA_STRATEGY.md`
+(draft 0.2, pending user review). This file covers the code-level work.
+
 Legend: **P0** = correctness, **P1** = structure/performance, **P2** = polish.
 Status: `[ ]` todo · `[~]` in progress · `[x]` done
 
@@ -51,6 +54,9 @@ Status: `[ ]` todo · `[~]` in progress · `[x]` done
       (`low < bottomBorder`, from bar 10, L569) are the same event. A "confirmed" range is almost
       always also "inactive" — the two concepts fight each other and `IsRangeActive` is effectively
       not used as a filter. Needs an explicit semantic decision.
+      **Resolved (settled):** grab = a *trade* beyond the POI → arms the range; violation = a
+      *close* beyond the far border → kills it. Violation scanning must start at the confirmation
+      bar. See `docs/EA_STRATEGY.md` §3.
 - [ ] **B5.** `InpMaxConfirmationCandles` does not bound the confirmation window (grab search runs to
       end of history, L529); `bestCandles` is always `InpMinConfirmationCandles`, so
       `actualConfCandles` is meaningless.
