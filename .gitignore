@@ -1,0 +1,39 @@
+# ============================================================================
+#  MQL5 data folder -- track ONLY the LiquidityRange application.
+#
+#  Strategy: deny everything at the root, then re-include the three folders
+#  that belong to this project. Any other project, generated file, profile,
+#  log, compiled binary or terminal artifact stays out of version control.
+# ============================================================================
+
+# --- Deny everything at the repository root --------------------------------
+/*
+
+# --- ...except the repository's own metadata -------------------------------
+!/.gitignore
+!/README.md
+!/REFINEMENTS.md
+
+# --- Indicator: only the source of this application -----------------------
+!/Indicators/
+/Indicators/*
+!/Indicators/Blood/
+/Indicators/Blood/*
+!/Indicators/Blood/LiquidityRange.mq5
+
+# --- Expert Advisors: this application's folder only ----------------------
+!/Experts/
+/Experts/*
+!/Experts/Blood/
+
+# --- Shared modules: canonical MQL5 include tree --------------------------
+!/Include/
+/Include/*
+!/Include/Blood/
+
+# --- Build artefacts and local state (never tracked) ----------------------
+*.ex5
+*.ex4
+*.mqproj
+*.log
+*.dat
